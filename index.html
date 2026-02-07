@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arian Mirdamadi | Portfolio</title>
+    
+    <!-- SEO & Fonts -->
+    <meta name="description" content="Portfolio of Arian Mirdamadi, AI Developer and Software Engineer specializing in Intelligent Assistants and Data Analysis.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Dark Theme */
+            --bg-color: #0a0b10;
+            --card-bg: #161821;
+            --accent-color: #4cc9f0;
+            --text-primary: #f8f9fa;
+            --text-secondary: #adb5bd;
+            --nav-bg: rgba(10, 11, 16, 0.9);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --accent-color: #0077b6;
+            --text-primary: #1a1a1b;
+            --text-secondary: #4a4a4a;
+            --nav-bg: rgba(240, 242, 245, 0.9);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', 'Vazirmatn', sans-serif; background-color: var(--bg-color); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; transition: var(--transition); }
+        
+        /* RTL Support */
+        body.rtl { direction: rtl; text-align: right; }
+        body.rtl .nav-links { flex-direction: row-reverse; }
+        body.rtl .section-title::after { left: auto; right: 0; }
+        body.rtl .btn-action i { margin-left: 10px; margin-right: 0; }
+        body.rtl .skill-item i { margin-left: 10px; margin-right: 0; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--nav-bg); backdrop-filter: blur(12px); z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .scrolling-text-container {
+            width: 150px; overflow: hidden; white-space: nowrap;
+            background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--accent-color);
+            padding: 4px 8px; border-radius: 4px;
+        }
+
+        .marquee-content {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: var(--accent-color);
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-links { display: flex; gap: 1.2rem; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; transition: var(--transition); font-weight: 500; }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* --- Controls --- */
+        .controls { display: flex; align-items: center; gap: 10px; background: var(--card-bg); padding: 5px; border-radius: 50px; border: 1px solid var(--border-color); }
+        .lang-toggle { display: flex; gap: 5px; }
+        .lang-btn { background: transparent; border: none; color: var(--text-secondary); padding: 4px 10px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; font-family: 'JetBrains Mono'; transition: var(--transition); }
+        .lang-btn.active { background: var(--accent-color); color: var(--bg-color); font-weight: bold; }
+        .theme-btn { background: transparent; border: none; color: var(--text-primary); cursor: pointer; font-size: 1rem; padding: 5px 10px; display: flex; align-items: center; transition: var(--transition); border-left: 1px solid var(--border-color); }
+        body.rtl .theme-btn { border-left: none; border-right: 1px solid var(--border-color); }
+
+        /* --- Sections --- */
+        section { padding: 100px 10%; max-width: 1300px; margin: 0 auto; }
+        .section-title { font-size: 2.2rem; margin-bottom: 3rem; position: relative; font-weight: 800; }
+        .section-title::after { content: ''; position: absolute; bottom: -12px; left: 0; width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
+
+        /* --- Hero --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 120px 10% 60px; }
+        .hero-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; max-width: 1200px; }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; }
+        .hero p { font-family: 'JetBrains Mono'; color: var(--accent-color); margin-bottom: 2.5rem; font-size: 1.1rem; }
+        .image-container { position: relative; width: 320px; height: 320px; }
+        .hero-image { width: 100%; height: 100%; border-radius: 24px; object-fit: cover; border: 1px solid var(--border-color); background: var(--card-bg); z-index: 5; position: relative; }
+        .floating-icon { position: absolute; color: var(--accent-color); font-size: 1.8rem; opacity: 0.6; z-index: 6; animation: float 4s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* --- Skills Section --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .skills-category { background: var(--card-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-color); transition: var(--transition); }
+        .skills-category:hover { border-color: var(--accent-color); }
+        .skills-category h3 { color: var(--accent-color); margin-bottom: 1.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        .skill-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-item { background: rgba(255, 255, 255, 0.05); padding: 8px 15px; border-radius: 8px; font-size: 0.85rem; border: 1px solid transparent; transition: 0.3s; display: flex; align-items: center; }
+        .skill-item:hover { background: rgba(76, 201, 240, 0.1); border-color: var(--accent-color); transform: scale(1.05); }
+        .skill-item i { margin-right: 8px; color: var(--accent-color); }
+
+        /* --- Common --- */
+        .card { background: var(--card-bg); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border-color); transition: var(--transition); }
+        .btn-action { padding: 1rem 2rem; background: var(--accent-color); color: var(--bg-color); text-decoration: none; font-weight: 700; border-radius: 8px; display: inline-flex; align-items: center; gap: 10px; }
+
+        /* --- Experience Timeline --- */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 2px; background: var(--accent-color); }
+        .timeline-item { position: relative; padding-left: 80px; margin-bottom: 40px; }
+        .timeline-date { position: absolute; left: 0; top: 0; background: var(--accent-color); color: var(--bg-color); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
+        .timeline-content h3 { color: var(--accent-color); margin-bottom: 8px; }
+        body.rtl .timeline::before { left: auto; right: 30px; }
+        body.rtl .timeline-item { padding-left: 0; padding-right: 80px; }
+        body.rtl .timeline-date { left: auto; right: 0; }
+
+        /* --- Contact Details --- */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .contact-item { display: flex; align-items: center; gap: 15px; padding: 1.5rem; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); }
+        .contact-item i { font-size: 1.5rem; color: var(--accent-color); }
+        
+        /* ایمیل: اضافه کردن word-wrap برای متن‌های طولانی */
+        .email-text { 
+            word-wrap: break-word; 
+            word-break: break-all; 
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        footer { text-align: center; padding: 60px 10%; border-top: 1px solid var(--border-color); }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .image-container { margin: 0 auto 2rem; }
+            .timeline::before { left: 20px; }
+            .timeline-item { padding-left: 60px; }
+            body.rtl .timeline::before { right: 20px; }
+            body.rtl .timeline-item { padding-right: 60px; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body id="main-body">
+
+    <nav>
+        <div class="scrolling-text-container">
+            <span class="marquee-content" data-key="marquee">AI Developer • Software Engineer • Intelligent Assistants • Data Analysis • Arian Mirdamadi •</span>
+        </div>
+        
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#experience" data-key="nav_experience">Experience</a>
+                <a href="#skills" data-key="nav_skills">Skills</a>
+                <a href="#education" data-key="nav_education">Education</a>
+                <a href="#contact" data-key="nav_contact">Contact</a>
+            </div>
+            
+            <div class="controls">
+                <div class="lang-toggle">
+                    <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn" id="btn-fa" onclick="setLanguage('fa')">FA</button>
+                    <button class="lang-btn" id="btn-ru" onclick="setLanguage('ru')">RU</button>
+                </div>
+                <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                    <i id="theme-icon" class="fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 data-key="hero_name">Arian Mirdamadi</h1>
+                <p data-key="hero_subtitle">AI Developer & Software Engineer</p>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;" data-key="hero_desc">Specializing in Intelligent Assistants, Chatbots, and Data Analysis</p>
+                <a href="#contact" class="btn-action">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-key="hero_btn">Contact Me</span>
+                </a>
+            </div>
+            <div class="hero-image-wrapper">
+                <div class="image-container">
+                    <i class="fas fa-robot floating-icon" style="top:-10px; left:-10px;"></i>
+                    <i class="fas fa-chart-bar floating-icon" style="top:40%; left:-35px; animation-delay:1s;"></i>
+                    <img src="C:\Users\ACER\Desktop\MY_PORTFOLIO\images\Copilot_20260105_014522.png" alt="Arian Mirdamadi" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience">
+        <h2 class="section-title" data-key="nav_experience">Work Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date" data-key="exp_date">2024 - Present</div>
+                <div class="timeline-content card">
+                    <h3 data-key="exp_title">AI Developer and Intelligent Assistant Specialist</h3>
+                    <p data-key="exp_desc">Design and development of intelligent assistants and chatbots. Data analysis and deriving managerial insights from collected data.</p>
+                    <p style="color: var(--accent-color); margin-top: 10px; font-weight: 600;" data-key="salary_exp">Salary Expectation: 15-20 Million Tomans</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+        <h2 class="section-title" data-key="nav_skills">Skills & Expertise</h2>
+        <div class="skills-grid">
+            <!-- AI & Development -->
+            <div class="skills-category">
+                <h3><i class="fas fa-robot"></i> <span data-key="skill_cat_1">AI & Development</span></h3>
+                <div class="skill-list">
+                    <span class="skill-item"><i class="fas fa-check-circle"></i> Intelligent Assistants</span>
+                    <span class="skill-item"><i class="fas fa-check-circle"></i> Chatbot Development</span>
+                    <span class="skill-item"><i class="fas fa-check-circle"></i> Machine Learning</span>
+                    <span class="skill-item"><i class="fas fa-check-circle"></i> Data Analysis</span>
+                </div>
+            </div>
+            <!-- Programming -->
+            <div class="skills-category">
+                <h3><i class="fas fa-code"></i> <span data-key="skill_cat_2">Programming</span></h3>
+                <div class="skill-list">
+                    <span class="skill-item"><i class="fab fa-python"></i> Python</span>
+                    <span class="skill-item"><i class="fas fa-database"></i> SQL</span>
+                    <span class="skill-item"><i class="fab fa-js"></i> JavaScript</span>
+                    <span class="skill-item"><i class="fab fa-html5"></i> HTML/CSS</span>
+                </div>
+            </div>
+            <!-- Tools & Soft Skills -->
+            <div class="skills-category">
+                <h3><i class="fas fa-tools"></i> <span data-key="skill_cat_3">Tools & Soft Skills</span></h3>
+                <div class="skill-list">
+                    <span class="skill-item"><i class="fab fa-trello"></i> Trello</span>
+                    <span class="skill-item"><i class="fab fa-asana"></i> Asana</span>
+                    <span class="skill-item"><i class="fab fa-jira"></i> JIRA</span>
+                    <span class="skill-item"><i class="fas fa-users"></i> Team Collaboration</span>
+                    <span class="skill-item"><i class="fas fa-comments"></i> Stakeholder Communication</span>
+                    <span class="skill-item"><i class="fas fa-tasks"></i> Project Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education">
+        <h2 class="section-title" data-key="nav_education">Education</h2>
+        <div class="card">
+            <h3 style="color: var(--accent-color); margin-bottom: 10px;" data-key="edu_title">Bachelor of Software Engineering</h3>
+            <p data-key="edu_university">Azad University of Isfahan</p>
+            <p style="color: var(--text-secondary); margin-top: 5px;" data-key="edu_status">Currently Enrolled</p>
+        </div>
+    </section>
+
+    <!-- PERSONAL INFO -->
+    <section id="personal">
+        <h2 class="section-title" data-key="personal_title">Personal Information</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <i class="fas fa-user"></i>
+                <div>
+                    <h4 data-key="info_age">Age</h4>
+                    <p>29 Years</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h4 data-key="info_location">Location</h4>
+                    <p>Isfahan, Iran</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-heart"></i>
+                <div>
+                    <h4 data-key="info_marital">Marital Status</h4>
+                    <p>Single</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <h2 class="section-title" data-key="nav_contact">Contact Details</h2>
+        <div class="card">
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4 data-key="contact_phone">Phone</h4>
+                        <p>03136688768</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>
+                        <h4 data-key="contact_mobile">Mobile</h4>
+                        <p>09139185416</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4 data-key="contact_email">Email</h4>
+                        <p class="email-text">arianmirdamadi1996@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-home"></i>
+                    <div>
+                        <h4 data-key="contact_address">Address</h4>
+                        <p>Sheikh Sadoogh, Isfahan, Iran</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <h3 style="margin-bottom: 1.5rem;" data-key="social_title">Connect on Social Media</h3>
+                <div style="display: flex; justify-content: center; gap: 25px; font-size: 2rem;">
+                    <a href="https://linkedin.com/in/arianmirdamadi" target="_blank" style="color: var(--accent-color);"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/arianmirdamadi1996-cmd" target="_blank" style="color: var(--accent-color);"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me/arianmirdamadi" target="_blank" style="color: var(--accent-color);"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p data-key="footer">© 2024 Arian Mirdamadi | AI Developer & Software Engineer</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                marquee: "AI Developer • Software Engineer • Intelligent Assistants • Data Analysis • Arian Mirdamadi •",
+                nav_experience: "Experience", nav_skills: "Skills", nav_education: "Education", nav_contact: "Contact",
+                hero_name: "Arian Mirdamadi", hero_subtitle: "AI Developer & Software Engineer",
+                hero_desc: "Specializing in Intelligent Assistants, Chatbots, and Data Analysis",
+                hero_btn: "Contact Me",
+                exp_date: "2024 - Present", exp_title: "AI Developer and Intelligent Assistant Specialist",
+                exp_desc: "Design and development of intelligent assistants and chatbots. Data analysis and deriving managerial insights from collected data.",
+                salary_exp: "Salary Expectation: 15-20 Million Tomans",
+                skill_cat_1: "AI & Development", skill_cat_2: "Programming", skill_cat_3: "Tools & Soft Skills",
+                edu_title: "Bachelor of Software Engineering", edu_university: "Azad University of Isfahan",
+                edu_status: "Currently Enrolled",
+                personal_title: "Personal Information",
+                info_age: "Age", info_location: "Location", info_marital: "Marital Status",
+                contact_phone: "Phone", contact_mobile: "Mobile", contact_email: "Email", contact_address: "Address",
+                social_title: "Connect on Social Media",
+                footer: "© 2024 Arian Mirdamadi | AI Developer & Software Engineer"
+            },
+            fa: {
+                marquee: "توسعه‌دهنده هوش مصنوعی • مهندس نرم‌افزار • دستیارهای هوشمند • تحلیل داده • آرین میردامادی •",
+                nav_experience: "تجربه کاری", nav_skills: "مهارت‌ها", nav_education: "تحصیلات", nav_contact: "تماس",
+                hero_name: "آرین میردامادی", hero_subtitle: "توسعه‌دهنده هوش مصنوعی و مهندس نرم‌افزار",
+                hero_desc: "تخصص در توسعه دستیارهای هوشمند، چت‌بات‌ها و تحلیل داده",
+                hero_btn: "تماس با من",
+                exp_date: "۱۴۰۳ - اکنون", exp_title: "توسعه‌دهنده هوش مصنوعی و متخصص دستیارهای هوشمند",
+                exp_desc: "طراحی و توسعه دستیارهای هوشمند و چت‌بات‌ها. تحلیل داده و استخراج بینش مدیریتی از داده‌های جمع‌آوری شده.",
+                salary_exp: "انتظار حقوق: ۱۵-۲۰ میلیون تومان",
+                skill_cat_1: "هوش مصنوعی و توسعه", skill_cat_2: "برنامه‌نویسی", skill_cat_3: "ابزارها و مهارت‌های نرم",
+                edu_title: "کارشناسی مهندسی نرم‌افزار", edu_university: "دانشگاه آزاد اسلامی اصفهان",
+                edu_status: "در حال تحصیل",
+                personal_title: "اطلاعات شخصی",
+                info_age: "سن", info_location: "موقعیت", info_marital: "وضعیت تأهل",
+                contact_phone: "تلفن ثابت", contact_mobile: "موبایل", contact_email: "ایمیل", contact_address: "آدرس",
+                social_title: "ارتباط در شبکه‌های اجتماعی",
+                footer: "© ۱۴۰۳ آرین میردامادی | توسعه‌دهنده هوش مصنوعی و مهندس نرم‌افزار"
+            },
+            ru: {
+                marquee: "Разработчик ИИ • Инженер ПО • Интеллектуальные ассистенты • Анализ данных • Ариан Мирдамади •",
+                nav_experience: "Опыт", nav_skills: "Навыки", nav_education: "Образование", nav_contact: "Контакты",
+                hero_name: "Ариан Мирдамади", hero_subtitle: "Разработчик ИИ и Инженер ПО",
+                hero_desc: "Специализация: интеллектуальные ассистенты, чат-боты и анализ данных",
+                hero_btn: "Связаться",
+                exp_date: "2024 - Настоящее время", exp_title: "Разработчик ИИ и специалист по интеллектуальным ассистентам",
+                exp_desc: "Разработка интеллектуальных ассистентов и чат-ботов. Анализ данных и извлечение управленческих инсайтов.",
+                salary_exp: "Ожидаемая зарплата: 15-20 миллионов томанов",
+                skill_cat_1: "ИИ и разработка", skill_cat_2: "Программирование", skill_cat_3: "Инструменты и навыки",
+                edu_title: "Бакалавр программной инженерии", edu_university: "Исфаханский университет Азад",
+                edu_status: "В настоящее время обучается",
+                personal_title: "Личная информация",
+                info_age: "Возраст", info_location: "Местоположение", info_marital: "Семейное положение",
+                contact_phone: "Телефон", contact_mobile: "Мобильный", contact_email: "Email", contact_address: "Адрес",
+                social_title: "Социальные сети",
+                footer: "© 2024 Ариан Мирдамади | Разработчик ИИ и Инженер ПО"
+            }
+        };
+
+        function setLanguage(lang) {
+            const body = document.getElementById('main-body');
+            lang === 'fa' ? body.classList.add('rtl') : body.classList.remove('rtl');
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${lang}`).classList.add('active');
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            localStorage.setItem('arianLang', lang);
+        }
+
+        function toggleTheme() {
+            const body = document.documentElement;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('arianTheme', newTheme);
+        }
+
+        window.onload = () => {
+            setLanguage(localStorage.getItem('arianLang') || 'en');
+            const savedTheme = localStorage.getItem('arianTheme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').className = savedTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+        };
+    </script>
+</body>
+</html>
